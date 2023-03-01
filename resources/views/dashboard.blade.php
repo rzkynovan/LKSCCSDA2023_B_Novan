@@ -19,6 +19,7 @@
                                 <th>Brand</th>
                                 <th>Type</th>
                                 <th>Price</th>
+                                <td>Image</td>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -30,6 +31,9 @@
                                 <td>{{ $item->brand }}</td>
                                 <td>{{ $item->type }}</td>
                                 <td>{{ $item->price }} USD</td>
+                                <td>
+                                  <img src="{{asset($item->image)}}" alt="">
+                                </td>
                                 <td>
                                     <div class="d-flex gap-3">
                                         <a href="{{ route('editcar', $item->id) }}" class="btn btn-link">Edit</a>

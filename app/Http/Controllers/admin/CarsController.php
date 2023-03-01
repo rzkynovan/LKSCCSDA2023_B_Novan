@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Models\Cars;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class CarsController extends Controller
 {
@@ -22,6 +23,7 @@ class CarsController extends Controller
      */
     public function create()
     {
+        
         return view('admin.createcar');
     }
 
@@ -30,14 +32,33 @@ class CarsController extends Controller
      */
     public function store(Request $request)
     {
-        Cars::create($request->all());
+        $image = $request->image;
+        if ($request->hasFile('image')) {
+            $extension  = request()->file('image')->getClientOriginalExtension(); //This is to get the extension of the image file just uploaded
+            $image_name = time() .'_' . $request->type . '.' . $extension;
+            $path = $request->file('image')->storeAs(
+                'images',
+                $image_name,
+                's3'
+            );
+            $image -> move(public_path() . '/images/', $image_name);
+        }
+            Cars::create([
+                'id' => $request->id,
+                'brand' => $request->brand,
+                'type' => $request->type,
+                'price' => $request->price,
+                'image'=>$path
+            ]);
+        
+           
         return redirect('dashboard');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
         //
     }

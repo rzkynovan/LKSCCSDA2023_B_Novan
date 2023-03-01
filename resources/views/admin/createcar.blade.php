@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900">
                     <h1 class="text-6xl font-bold text-center ">Create Car</h1>
 
-                    <form action="{{ route('storecar') }}" method="POST">
+                    <form action="{{ route('storecar') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="id" class="form-label">ID</label>
@@ -28,6 +28,10 @@
                         <div class="mb-3">
                             <label for="price" class="form-label">Price</label>
                             <input type="number" name="price" id="price" class="form-control" min="1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Image</label>
+                            <input type="file" name="image" id="image" class="form-control" min="1">
                         </div>
                         <button type="submit" class="btn btn-success bg-success w-full" >Create!</button>
                     </form>

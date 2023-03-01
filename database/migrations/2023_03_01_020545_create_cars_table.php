@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigInteger('id')->uniqid();
             $table->string('brand');
             $table->string('type');
+            $table->string('image')->nullable();
             $table->bigInteger('price');
             $table->timestamps();
         });
